@@ -40,7 +40,7 @@ public enum FurnaceType {
 			icons[counter++] = registrar.registerIcon(String.format("%s:%s", TextureHelper.TEXTURE_LOC, str));
 	}
 	
-	public Icon getIconBySide(int side, int dir){
+	public Icon getIconBySide(int side, int dir, boolean isBurning){
 		if(dir == 0 || dir == 3){
 			switch(side){
 			case TextureHelper.TOP:   return icons[0];
@@ -50,13 +50,13 @@ public enum FurnaceType {
 			}
 		}else if(dir == 2){
 			 if(side == TextureHelper.BACK)
-				return icons[1];
+				return icons[isBurning ? 2:1];
 		}else if(dir == 5){
 			if(side == TextureHelper.RIGHT)
-				return icons[1];
+				return icons[isBurning ? 2:1];
 		}else if(dir == 4){
 			if(side == TextureHelper.LEFT)
-				return icons[1];
+				return icons[isBurning ? 2:1];
 		}
 		switch(side){
 		case TextureHelper.TOP:   return icons[0];
