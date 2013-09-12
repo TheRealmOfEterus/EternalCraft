@@ -45,4 +45,4 @@ Jad: Moderate
 Mason: Great
 
 Details (incomplete as of now) at:
-https://drive.google...Vkk&usp=sharing 
+https://drive.google.com/folderview?id=0B7wxK7Gtkn_Wem5EemZLamhaVkk&usp=sharing
