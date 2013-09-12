@@ -59,15 +59,15 @@ public class BlockECFurnace extends BlockECContainer{
 			blockAccess = Eternalcraft.proxy.getClientSideWorld();
 		TileEntity te = blockAccess.getBlockTileEntity(x, y, z);
 		if(te != null && te instanceof TileEntityECFurnace)
-			return FurnaceType.STONE.getIconBySide(par5, ((TileEntityECFurnace)te).getDirFacing());
+			return FurnaceType.STONE.getIconBySide(par5, ((TileEntityECFurnace)te).getDirFacing(), ((TileEntityECFurnace)te).isBurning());
 		return super.getBlockTexture(blockAccess, x, y, z, par5);
 	}
 	@Override
 	public Icon getIcon(int side, int meta) {
-		switch(meta){
-		case 0: return FurnaceType.STONE.getIconBySide(side, 0);
-		}
-		return null;
+//		switch(meta){
+//		case 0: return FurnaceType.STONE.getIconBySide(side, 0);
+//		}
+		return super.getIcon(side, meta);
 	}
 	
 	@Override
