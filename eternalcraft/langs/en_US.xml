@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties version="1.0">
+    <!-- Author: bau5 -->
+        <!--Blocks-->
+    <entry key="tile.ec.machineblock.stonefurnace.name">Stone Furnace</entry>
+    <entry key="tile.ec.machineblock.ironfurnace.name">Iron Furnace</entry>
+        <!--Others-->
+    <entry key="itemGroup.tabEternalCraft">Eternal Craft</entry>
+</properties>
