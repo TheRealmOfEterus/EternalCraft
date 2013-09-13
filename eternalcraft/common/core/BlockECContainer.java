@@ -14,6 +14,14 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
+/**
+ * A base for most of the blocks that will have an inventory
+ * of some sort. Handles directional placing, droping ivnentory,
+ * etc. All children will inherit this behavior.
+ * 
+ * @author bau5
+ *
+ */
 public class BlockECContainer extends BlockContainer {
 	
 	protected BlockECContainer(int id, Material mat) {
