@@ -5,6 +5,11 @@ import eternalcraft.common.machines.EternalcraftMachines;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
+/**
+ * 
+ * @author bau5
+ *
+ */
 public class CreativeTabEC extends CreativeTabs{
 
 	public CreativeTabEC(String label) {
