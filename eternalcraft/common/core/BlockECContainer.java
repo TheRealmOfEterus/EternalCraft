@@ -12,8 +12,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import eternalcraft.common.machines.IMachine;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
+/**
+ * A base for most of the blocks that will have an inventory
+ * of some sort. Handles directional placing, droping ivnentory,
+ * etc. All children will inherit this behavior.
+ * 
+ * @author bau5
+ *
+ */
 public class BlockECContainer extends BlockContainer {
 	
 	protected BlockECContainer(int id, Material mat) {
@@ -46,7 +55,7 @@ public class BlockECContainer extends BlockContainer {
         TileEntity te = world.getBlockTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityECFurnace)
         {
-            ((TileEntityECFurnace)te).setDirFacing(dir);
+            ((IMachine)te).setDirectionFacing(dir);
             world.markBlockForUpdate(x, y, z);
         }
     }
