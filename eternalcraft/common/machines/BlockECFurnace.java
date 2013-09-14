@@ -57,10 +57,15 @@ public class BlockECFurnace extends BlockECContainer{
 	public Icon getBlockTexture(IBlockAccess blockAccess, int x,
 			int y, int z, int par5) {
 		TileEntity te = blockAccess.getBlockTileEntity(x, y, z);
+<<<<<<< HEAD
 		if(te != null && te instanceof IMachine){
 			IMachine machine = (IMachine)te;
 			return machine.getMachineType().getIconBySide(par5, machine.getDirectionFacing(), machine.isActive());
 		}
+=======
+		if(te != null && te instanceof TileEntityECFurnace)
+			return FurnaceType.STONE.getIconBySide(par5, ((TileEntityECFurnace)te).getDirFacing(), ((TileEntityECFurnace)te).isBurning());
+>>>>>>> 72568628848cea4a896729a943634200c9d5e3d6
 		return super.getBlockTexture(blockAccess, x, y, z, par5);
 	}
 	@Override
