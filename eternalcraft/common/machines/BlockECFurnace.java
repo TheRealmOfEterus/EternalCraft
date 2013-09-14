@@ -15,6 +15,7 @@ import net.minecraft.world.World;
 import eternalcraft.common.Eternalcraft;
 import eternalcraft.common.core.BlockECContainer;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
+
 /**
  * 
  * @author bau5
@@ -40,7 +41,7 @@ public class BlockECFurnace extends BlockECContainer{
 	}
 	@Override
 	public TileEntity createTileEntity(World world, int metadata) {
-		return FurnaceType.makeTileEntity(metadata);
+		return MachineType.makeTileEntity(metadata);
 	}
 	@Override
 	public TileEntity createNewTileEntity(World world) {
@@ -49,17 +50,17 @@ public class BlockECFurnace extends BlockECContainer{
 	
 	@Override
 	public void registerIcons(IconRegister registrar) {
-		for(FurnaceType type : FurnaceType.values())
+		for(MachineType type : MachineType.values())
 			type.makeIcons(registrar);
 	}
 	@Override
 	public Icon getBlockTexture(IBlockAccess blockAccess, int x,
 			int y, int z, int par5) {
-		if(Eternalcraft.proxy.getClientSideWorld() != null)
-			blockAccess = Eternalcraft.proxy.getClientSideWorld();
 		TileEntity te = blockAccess.getBlockTileEntity(x, y, z);
-		if(te != null && te instanceof TileEntityECFurnace)
-			return FurnaceType.STONE.getIconBySide(par5, ((TileEntityECFurnace)te).getDirFacing(), ((TileEntityECFurnace)te).isBurning());
+		if(te != null && te instanceof IMachine){
+			IMachine machine = (IMachine)te;
+			return machine.getMachineType().getIconBySide(par5, machine.getDirectionFacing(), machine.isActive());
+		}
 		return super.getBlockTexture(blockAccess, x, y, z, par5);
 	}
 	@Override
@@ -73,7 +74,6 @@ public class BlockECFurnace extends BlockECContainer{
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
 		list.add(new ItemStack(id, 1, 0));
-		list.add(new ItemStack(id, 1, 1));
 	}
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {

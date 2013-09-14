@@ -12,6 +12,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import eternalcraft.common.machines.IMachine;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
 /**
@@ -54,7 +55,7 @@ public class BlockECContainer extends BlockContainer {
         TileEntity te = world.getBlockTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityECFurnace)
         {
-            ((TileEntityECFurnace)te).setDirFacing(dir);
+            ((IMachine)te).setDirectionFacing(dir);
             world.markBlockForUpdate(x, y, z);
         }
     }

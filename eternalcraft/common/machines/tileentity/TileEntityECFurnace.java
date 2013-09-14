@@ -1,6 +1,8 @@
 package eternalcraft.common.machines.tileentity;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
+import eternalcraft.common.machines.IMachine;
+import eternalcraft.common.machines.MachineType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.inventory.IInventory;
@@ -14,7 +16,12 @@ import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntityFurnace;
 
-public class TileEntityECFurnace extends TileEntityFurnace implements IInventory, ISidedInventory {
+/**
+ * 
+ * @author bau5
+ *
+ */
+public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, IInventory, ISidedInventory {
 	private byte dirFacing = 0;
 	protected int decrementValue;	
 	@Override
@@ -86,11 +93,6 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IInventory
     }
 	
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setByte("facing", dirFacing);
-	}
-	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeToNBT(nbt);
@@ -104,15 +106,13 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IInventory
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
-		setDirFacing(tagCompound.getByte("facing"));
+		setDirectionFacing(tagCompound.getByte("facing"));
 	}
-	
-	public void setDirFacing(byte dirFacing) {
-		this.dirFacing = dirFacing;
+	@Override
+	public void writeToNBT(NBTTagCompound tag) {
+		super.writeToNBT(tag);
+		tag.setByte("facing", dirFacing);
 	}
-	public byte getDirFacing() {
-		return dirFacing;
-	}    
 	/* 
 	 * Private function in TileEntityFurnace we need access to... 
 	 */
@@ -132,4 +132,24 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IInventory
             return (result <= getInventoryStackLimit() && result <= itemstack.getMaxStackSize());
         }
     }
+
+	@Override
+	public byte getDirectionFacing() {
+		return this.dirFacing;
+	}
+
+	@Override
+	public void setDirectionFacing(byte dir) {
+		this.dirFacing = dir;
+	}
+
+	@Override
+	public MachineType getMachineType() {
+		return MachineType.FURNACE;
+	}
+	
+	@Override
+	public boolean isActive() {
+		return this.isBurning();
+	}
 }

@@ -8,8 +8,7 @@ import cpw.mods.fml.common.network.IGuiHandler;
 import eternalcraft.client.GuiECFurnace;
 import eternalcraft.client.GuiECFurnace.Gui;
 import eternalcraft.common.Eternalcraft;
-import eternalcraft.common.machines.FurnaceType;
-import eternalcraft.common.machines.tileentity.ContainerECFurnaceStone;
+import eternalcraft.common.machines.tileentity.ContainerECFurnace;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
 /**
@@ -32,7 +31,7 @@ public class CommonProxy implements IGuiHandler {
 			return null;
 		
 		switch(ID){
-		case 0: return new ContainerECFurnaceStone(player.inventory, (TileEntityECFurnace)te);
+		case 0: return new ContainerECFurnace(player.inventory, (TileEntityECFurnace)te);
 		case 1: return new ContainerFurnace(player.inventory, (TileEntityECFurnace)te);
 		}
 		return null;
@@ -45,8 +44,8 @@ public class CommonProxy implements IGuiHandler {
 		if(te == null || !(te instanceof TileEntityECFurnace))
 				return null;
 		switch(ID){
-		case 0: return new GuiECFurnace(Gui.STONE, player.inventory, ((TileEntityECFurnace)te));
-		case 1: return new GuiECFurnace(Gui.IRON, player.inventory, ((TileEntityECFurnace)te));
+		case 0: return new GuiECFurnace(Gui.FURNACE, player.inventory, ((TileEntityECFurnace)te));
+//		case 1: return new GuiECFurnace(Gui.IRON, player.inventory, ((TileEntityECFurnace)te));
 		}
 		return null;
 	}

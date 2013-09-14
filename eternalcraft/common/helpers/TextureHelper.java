@@ -2,9 +2,9 @@ package eternalcraft.common.helpers;
 
 import java.util.HashMap;
 
-import net.minecraft.util.Icon;
 import eternalcraft.common.core.Reference;
-import eternalcraft.common.machines.FurnaceType;
+import eternalcraft.common.machines.MachineType;
+
 /**
  * 
  * @author bau5
@@ -13,19 +13,19 @@ import eternalcraft.common.machines.FurnaceType;
 public class TextureHelper {
 	public static final TextureHelper instance = new TextureHelper();
 	public static final String TEXTURE_LOC = Reference.TEXTURE_LOC;
-	public static HashMap<Integer, String[]> furnaceTextureNamesMap = new HashMap<Integer, String[]>();
+	public static HashMap<Integer, String[]> machineTextureNamesMap = new HashMap<Integer, String[]>();
 	public static final String[] sides = {
 		"top", "front", "front_on", "side"
 	};
-	public static String[] getTextureNamesForType(FurnaceType furnaceType) {
-		return furnaceTextureNamesMap.get(furnaceType.ordinal());
+	public static String[] getTextureNamesForType(MachineType machineType) {
+		return machineTextureNamesMap.get(machineType.ordinal());
 	}
 	public static void buildFurnaceTextureNames(){
-		for(FurnaceType type : FurnaceType.values()){
+		for(MachineType type : MachineType.values()){
 			String[] names = new String[sides.length];
 			for(int i = 0; i < names.length; i++)
-				names[i] = String.format("%sfurnace_%s", type.name().toLowerCase(), sides[i]);
-			furnaceTextureNamesMap.put(type.ordinal(), names);
+				names[i] = String.format("%s_%s", type.name().toLowerCase(), sides[i]);
+			machineTextureNamesMap.put(type.ordinal(), names);
 		}
 	}
 	/**

@@ -13,6 +13,7 @@ import eternalcraft.common.core.Reference;
  *
  */
 public class ConfigHandler {
+	private static EternalcraftSettings defaults;
 	/**
 	 * Loading information from the config.
 	 * 
@@ -20,11 +21,14 @@ public class ConfigHandler {
 	 */
 	public static EternalcraftSettings loadConfig(Configuration theConfig){
 		EternalcraftSettings settings = new EternalcraftSettings();
-		EternalcraftSettings defaults = settings.getDefaults();
+		defaults = settings.getDefaults();
 		try{
 			theConfig.load();
 			settings.VERSION_CHECK = theConfig.get(Configuration.CATEGORY_GENERAL, "Version Check Enabled", defaults.doVersionCheck()).getBoolean(defaults.doVersionCheck());
-			settings.MACHINE_BLOCK_ID = theConfig.get(Configuration.CATEGORY_BLOCK, "Machine Block", defaults.getMachineBlockID()).getInt(defaults.getMachineBlockID());
+			settings.MACHINE_BLOCK_ID = getBlock(theConfig, "Machine Block", defaults.getMachineBlockID());
+			settings.MACHINES_ID = getBlock(theConfig, "Machines Block", defaults.getMachinesID());
+			settings.MACHINE_PART_ID = getItem(theConfig, "Machine Part", defaults.getMachinePartItemID());
+			settings.MACHINE_TOOL_ID = getItem(theConfig, "Machine Tool", defaults.getMachineToolID());
 			settings.successfullyLoaded = true;
 		}catch(Exception ex){
 			FMLLog.log(Level.SEVERE, ex, Reference.MOD_NAME +": Error encountered while loading config file.");
@@ -32,5 +36,12 @@ public class ConfigHandler {
 			theConfig.save();
 		}
 		return settings;
+	}
+	
+	public static int getItem(Configuration config, String name, int defaultID){
+		return config.getItem(name, defaultID).getInt(defaultID);
+	}
+	public static int getBlock(Configuration config, String name, int defaultID){
+		return config.getBlock(name, defaultID).getInt(defaultID);
 	}
 }

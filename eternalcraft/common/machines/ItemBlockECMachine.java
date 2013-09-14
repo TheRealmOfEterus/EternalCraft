@@ -1,7 +1,6 @@
 package eternalcraft.common.machines;
 
 import net.minecraft.block.Block;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemBlockWithMetadata;
 import net.minecraft.item.ItemStack;
 
@@ -13,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public class ItemBlockECMachine extends ItemBlockWithMetadata{
 
 	private final String machineNames[] = {
-		"stonefurnace", "ironfurnace"	
+		"furnace","grinder"	
 	};
 	
 	public ItemBlockECMachine(int id, Block mainBlock) {

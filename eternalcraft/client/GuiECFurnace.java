@@ -8,32 +8,38 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import eternalcraft.common.machines.FurnaceType;
-import eternalcraft.common.machines.tileentity.ContainerECFurnaceStone;
+import eternalcraft.common.machines.MachineType;
+import eternalcraft.common.machines.tileentity.ContainerECFurnace;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
+/**
+ * 
+ * @author bau5
+ *
+ */
 public class GuiECFurnace extends GuiContainer{
 	public enum Resources{
-		STONE(new ResourceLocation("eternalcraft", "textures/gui/furnaces/stonegui.png")),
-		IRON(new ResourceLocation("eternalcraft", "textures/gui/furnaces/irongui.png"));
+		FURNACE(new ResourceLocation("eternalcraft", "textures/gui/furnaces/stonegui.png"));
+//		IRON(new ResourceLocation("eternalcraft", "textures/gui/furnaces/irongui.png"));
 		public final ResourceLocation resource;
 		private Resources(ResourceLocation loc){
 			resource = loc;
 		}
 	}
 	public enum Gui{
-		STONE(FurnaceType.STONE, Resources.STONE),
-		IRON(FurnaceType.IRON, Resources.IRON);
+		FURNACE(MachineType.FURNACE, Resources.FURNACE);
+//		IRON(MachineType.IRON, Resources.IRON);
 		private Resources resources;
-		private FurnaceType furnaceType;
-		private Gui(FurnaceType type, Resources res){
+		private MachineType machineType;
+		private Gui(MachineType type, Resources res){
 			resources = res;
-			furnaceType = type;
+			machineType = type;
 		}
 		public Container makeContainer(InventoryPlayer invPlayer, TileEntityECFurnace teFurnace){
-			switch(furnaceType){
-			case STONE: return new ContainerECFurnaceStone(invPlayer, teFurnace);
-			case IRON: return new ContainerFurnace(invPlayer, teFurnace);
+			switch(machineType){
+			case BASE: return null;
+			case FURNACE: return new ContainerECFurnace(invPlayer, teFurnace);
+//			case IRON: return new ContainerFurnace(invPlayer, teFurnace);
 			}
 			return null;
 		}
