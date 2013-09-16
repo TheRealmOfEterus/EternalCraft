@@ -16,19 +16,21 @@ import eternalcraft.common.machines.tileentity.TileEntityMachine;
  *
  */
 public enum MachineType {
-	BASE(TileEntityMachine.class, -1),
-	FURNACE(TileEntityECFurnace.class, Eternalcraft.GUI_ID++);
+	BASE(TileEntityMachine.class, new String[]{}, -1),
+	FURNACE(TileEntityECFurnace.class, new String[]{ "decrementValue" }, Eternalcraft.GUI_ID++);
 	
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
 	public Class<? extends TileEntity> theMachine;
+	public String[] modifiers;
 	public int guiID;
 	public int tileType;
 	
-	MachineType(Class<? extends TileEntity> tileClass, int guiid){
+	MachineType(Class<? extends TileEntity> tileClass, String[] modifiers, int guiid){
 		theMachine = tileClass;
 		guiID = guiid;
 		tileType = this.ordinal();
+		this.modifiers = modifiers;
 	}
 	
 	public void makeIcons(IconRegister registrar){
@@ -39,7 +41,7 @@ public enum MachineType {
 			icons[counter++] = registrar.registerIcon(String.format("%s:%s", TextureHelper.TEXTURE_LOC, str));
 	}
 	
-	public Icon getIconBySide(int side, int dir, boolean isBurning){
+	public Icon getIconBySide(int side, int dir, boolean isActive){
 		if(dir == 0 || dir == 3){
 			switch(side){
 			case TextureHelper.TOP:   return icons[0];
@@ -49,19 +51,23 @@ public enum MachineType {
 			}
 		}else if(dir == 2){
 			 if(side == TextureHelper.BACK)
-				return icons[isBurning ? 2:1];
+				return icons[isActive ? 2:1];
 		}else if(dir == 5){
 			if(side == TextureHelper.RIGHT)
-				return icons[isBurning ? 2:1];
+				return icons[isActive ? 2:1];
 		}else if(dir == 4){
 			if(side == TextureHelper.LEFT)
-				return icons[isBurning ? 2:1];
+				return icons[isActive ? 2:1];
 		}
 		switch(side){
 		case TextureHelper.TOP:   return icons[0];
 		case TextureHelper.BOTTOM:return icons[0];
 		default: return icons[3];
 		}
+	}
+	
+	public String[] getModifiers(){
+		return modifiers;
 	}
 
 	public static TileEntity makeTileEntity(int meta) {
