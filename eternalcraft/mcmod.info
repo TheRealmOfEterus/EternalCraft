@@ -1,0 +1,17 @@
+[
+{
+  "modid": "eternalcraft",
+  "name": "Eternalcraft",
+  "description": "",
+  "version": "0.0.1",
+  "mcversion": "1.6.2",
+  "logoFile": "",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["theTechnicLord", "_bau5", "Azhdev", "Master801", "Antimatter", "Minimlike", "Sargeantlonewolf", "Esterdell"],
+  "credits": "Made by The Realm Of Eterus",
+  "parent": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
