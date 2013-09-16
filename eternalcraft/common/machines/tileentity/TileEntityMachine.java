@@ -13,7 +13,7 @@ import eternalcraft.common.machines.MachineType;
  *
  */
 public class TileEntityMachine extends TileEntity implements IMachine{
-	private HashMap<String, String> machineModifiers = new HashMap();
+	private HashMap<String, Object> machineModifiers = new HashMap();
 	private byte facingDirection = -1;
 	public TileEntityMachine(){
 		
@@ -22,11 +22,13 @@ public class TileEntityMachine extends TileEntity implements IMachine{
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 		setDirectionFacing(tagCompound.getByte("facing"));
+		readMachinePropertiesFromNBT(tagCompound);
 	}
 	@Override
-	public void writeToNBT(NBTTagCompound tag) {
-		super.writeToNBT(tag);
-		tag.setByte("facing", facingDirection);
+	public void writeToNBT(NBTTagCompound tagCompound) {
+		super.writeToNBT(tagCompound);
+		tagCompound.setByte("facing", facingDirection);
+		writeMachinePropertiesToNBT(tagCompound);
 	}
 	@Override
 	public byte getDirectionFacing() {
@@ -48,14 +50,14 @@ public class TileEntityMachine extends TileEntity implements IMachine{
 		return false;
 	}
 	@Override
-	public void setMachineProperty(String key, String value) {
+	public void setMachineProperty(String key, Object value) {
 		if(machineModifiers.containsKey(key)){
 			machineModifiers.remove(key);
 			machineModifiers.put(key, value);
 		}
 	}
 	@Override
-	public String getMachineProperty(String key) {
+	public Object getMachineProperty(String key) {
 		if(!machineModifiers.containsKey(key))
 			return "[null]";
 		else
@@ -63,12 +65,10 @@ public class TileEntityMachine extends TileEntity implements IMachine{
 	}
 	@Override
 	public void writeMachinePropertiesToNBT(NBTTagCompound mainTag) {
-		// TODO Auto-generated method stub
 		
 	}
 	@Override
 	public void readMachinePropertiesFromNBT(NBTTagCompound mainTag) {
-		// TODO Auto-generated method stub
 		
 	}
 }

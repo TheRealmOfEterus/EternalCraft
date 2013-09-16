@@ -17,7 +17,7 @@ import eternalcraft.common.machines.tileentity.TileEntityMachine;
  */
 public enum MachineType {
 	BASE(TileEntityMachine.class, new String[]{}, -1),
-	FURNACE(TileEntityECFurnace.class, new String[]{ "decrementValue" }, Eternalcraft.GUI_ID++);
+	FURNACE(TileEntityECFurnace.class, new String[]{ "decrementValue", "material" }, Eternalcraft.GUI_ID++);
 	
 	@SideOnly(Side.CLIENT)
 	private Icon[] icons;
