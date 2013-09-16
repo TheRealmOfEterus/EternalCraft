@@ -53,7 +53,7 @@ public class BlockECContainer extends BlockContainer {
         if (plyrFacing == 3)
             dir = 4;
         TileEntity te = world.getBlockTileEntity(x, y, z);
-        if (te != null && te instanceof TileEntityECFurnace)
+        if (te != null && te instanceof IMachine)
         {
             ((IMachine)te).setDirectionFacing(dir);
             world.markBlockForUpdate(x, y, z);

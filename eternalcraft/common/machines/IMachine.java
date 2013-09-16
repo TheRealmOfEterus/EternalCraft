@@ -1,5 +1,7 @@
 package eternalcraft.common.machines;
 
+import net.minecraft.nbt.NBTTagCompound;
+
 /**
  * 
  * @author bau5
@@ -27,4 +29,29 @@ public interface IMachine {
 	 * @return state
 	 */
 	boolean isActive();
+	/**
+	 * Sets the value of a specific key within the machine. 
+	 * For example, sets the burning speed of Furnaces.
+	 * @param key The string identifier
+	 * @param value The string value
+	 */
+	void setMachineProperty(String key, Object value);
+	/**
+	 * Gets the value of the key passed.
+	 * @param key
+	 * @return Returns a string representation of the key's value
+	 */
+	Object getMachineProperty(String key);
+	/**
+	 * Pass off for writing the machine's properties to the tag. Here
+	 * to remind everyone to.
+	 * @param mainTag The tag for the tile entity.
+	 */
+	void writeMachinePropertiesToNBT(NBTTagCompound mainTag);
+	/**
+	 * Pass off for reading the machine's properties from the tag. Here
+	 * to remind everyone to.
+	 * @param mainTag The tag for the tile entity.
+	 */
+	void readMachinePropertiesFromNBT(NBTTagCompound mainTag);
 }

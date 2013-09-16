@@ -2,18 +2,19 @@ package eternalcraft.common.machines;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import eternalcraft.common.Eternalcraft;
 import eternalcraft.common.core.BlockECContainer;
+import eternalcraft.common.helpers.MachineBuilderHelper;
 import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
 /**
@@ -33,10 +34,14 @@ public class BlockECFurnace extends BlockECContainer{
 			float par8, float par9) {
 		TileEntity te = world.getBlockTileEntity(x, y, z);
 		int meta = world.getBlockMetadata(x, y, z);
-		if(te == null || player.isSneaking() || !(te instanceof TileEntityECFurnace)){
+		if(te == null || player.isSneaking() || !(te instanceof IMachine) || ((IMachine)te).getMachineType() == null){
 			return true;
 		}
-		Eternalcraft.proxy.openFurnaceGUI(player, world, x, y, z, meta);
+		switch(((IMachine)te).getMachineType()){
+		case BASE: return true;
+		case FURNACE: Eternalcraft.proxy.openFurnaceGUI(player, world, x, y, z, meta);
+			break;
+		}
 		return true;
 	}
 	@Override
@@ -57,15 +62,12 @@ public class BlockECFurnace extends BlockECContainer{
 	public Icon getBlockTexture(IBlockAccess blockAccess, int x,
 			int y, int z, int par5) {
 		TileEntity te = blockAccess.getBlockTileEntity(x, y, z);
-<<<<<<< HEAD
 		if(te != null && te instanceof IMachine){
 			IMachine machine = (IMachine)te;
+			if(machine.getMachineType() == null)
+				return null;
 			return machine.getMachineType().getIconBySide(par5, machine.getDirectionFacing(), machine.isActive());
 		}
-=======
-		if(te != null && te instanceof TileEntityECFurnace)
-			return FurnaceType.STONE.getIconBySide(par5, ((TileEntityECFurnace)te).getDirFacing(), ((TileEntityECFurnace)te).isBurning());
->>>>>>> 72568628848cea4a896729a943634200c9d5e3d6
 		return super.getBlockTexture(blockAccess, x, y, z, par5);
 	}
 	@Override
@@ -78,7 +80,7 @@ public class BlockECFurnace extends BlockECContainer{
 	
 	@Override
 	public void getSubBlocks(int id, CreativeTabs tab, List list) {
-		list.add(new ItemStack(id, 1, 0));
+		list.add(MachineBuilderHelper.instance().makeFurnace());
 	}
 	@Override
 	public void onBlockAdded(World par1World, int par2, int par3, int par4) {

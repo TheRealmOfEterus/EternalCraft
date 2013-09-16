@@ -24,6 +24,12 @@ import net.minecraft.tileentity.TileEntityFurnace;
 public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, IInventory, ISidedInventory {
 	private byte dirFacing = 0;
 	protected int decrementValue;	
+	private ItemStack material;
+	
+	public TileEntityECFurnace(){
+		
+	}
+	
 	@Override
 	public void updateEntity()
     {
@@ -107,11 +113,13 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 		setDirectionFacing(tagCompound.getByte("facing"));
+		readMachinePropertiesFromNBT(tagCompound);
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setByte("facing", dirFacing);
+		writeMachinePropertiesToNBT(tag);
 	}
 	/* 
 	 * Private function in TileEntityFurnace we need access to... 
@@ -151,5 +159,42 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 	@Override
 	public boolean isActive() {
 		return this.isBurning();
+	}
+
+	@Override
+	public Object getMachineProperty(String id) {
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[0]))
+			return new String("" +decrementValue);
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[1]))
+			return material;
+		return null;
+	}
+
+	@Override
+	public void setMachineProperty(String key, Object value) {
+		if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[0])){
+			decrementValue = Integer.parseInt((String)value);
+		}else if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[1])){
+			material = (ItemStack)value;
+		}
+	}
+
+	@Override
+	public void writeMachinePropertiesToNBT(NBTTagCompound mainTag) {
+		NBTTagCompound modifierTag = new NBTTagCompound();
+		modifierTag.setString(MachineType.FURNACE.modifiers[0], "2");
+		NBTTagCompound tag = new NBTTagCompound();
+		material.writeToNBT(tag);
+		modifierTag.setTag(MachineType.FURNACE.modifiers[1], tag);
+		mainTag.setCompoundTag("machineModifiers", modifierTag);		
+	}
+
+	@Override
+	public void readMachinePropertiesFromNBT(NBTTagCompound mainTag) {
+		NBTTagCompound modifierTag = mainTag.getCompoundTag("machineModifiers");
+		int val = Integer.parseInt(modifierTag.getString(MachineType.FURNACE.modifiers[0]));
+		ItemStack stack = ItemStack.loadItemStackFromNBT((NBTTagCompound)modifierTag.getTag(MachineType.FURNACE.modifiers[1]));
+		material = stack;
+		decrementValue = val;
 	}
 }

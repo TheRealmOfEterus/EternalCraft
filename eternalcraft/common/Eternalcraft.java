@@ -53,6 +53,7 @@ public class Eternalcraft {
 	@EventHandler
 	public void postInitialization(FMLPostInitializationEvent ev){
 		EternalcraftMachines.initRecipes();
+		proxy.registerRenderInformation();
 	}
 	
 	public void initParts(){
