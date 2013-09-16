@@ -15,5 +15,4 @@ public class ContainerECFurnace extends ContainerFurnace {
 			TileEntityFurnace furnace) {
 		super(invPlayer, furnace);
 	}
-
 }

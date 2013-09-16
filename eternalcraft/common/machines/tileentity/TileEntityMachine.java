@@ -1,13 +1,11 @@
 package eternalcraft.common.machines.tileentity;
 
-import eternalcraft.common.machines.IMachine;
-import eternalcraft.common.machines.MachineType;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.ItemStack;
+import java.util.HashMap;
+
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+import eternalcraft.common.machines.IMachine;
+import eternalcraft.common.machines.MachineType;
 
 /**
  * 
@@ -15,6 +13,7 @@ import net.minecraft.tileentity.TileEntity;
  *
  */
 public class TileEntityMachine extends TileEntity implements IMachine{
+	private HashMap<String, String> machineModifiers = new HashMap();
 	private byte facingDirection = -1;
 	public TileEntityMachine(){
 		
@@ -47,5 +46,29 @@ public class TileEntityMachine extends TileEntity implements IMachine{
 	@Override
 	public boolean isActive() {
 		return false;
+	}
+	@Override
+	public void setMachineProperty(String key, String value) {
+		if(machineModifiers.containsKey(key)){
+			machineModifiers.remove(key);
+			machineModifiers.put(key, value);
+		}
+	}
+	@Override
+	public String getMachineProperty(String key) {
+		if(!machineModifiers.containsKey(key))
+			return "[null]";
+		else
+			return machineModifiers.get(key);
+	}
+	@Override
+	public void writeMachinePropertiesToNBT(NBTTagCompound mainTag) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void readMachinePropertiesFromNBT(NBTTagCompound mainTag) {
+		// TODO Auto-generated method stub
+		
 	}
 }
