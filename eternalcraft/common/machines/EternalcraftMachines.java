@@ -20,8 +20,6 @@ public class EternalcraftMachines {
 		initBlocks();
 		machinePartItem = new ItemMachinePart(settings().getMachinePartItemID(), 0).setUnlocalizedName("ec.machinepart");
 		machineToolItem = new ItemMachineTool(settings().getMachineToolID()).setUnlocalizedName("ec.machinetool");
-		GameRegistry.registerBlock(machineBlock, "ec_machineblock");
-		GameRegistry.registerBlock(machines, ItemBlockECMachine.class, "ec_machines");
 		registerMachineTileEntities();
 	}
 	
@@ -32,6 +30,8 @@ public class EternalcraftMachines {
 	private static void initBlocks(){
 		machines = new BlockECFurnace(settings().getMachinesID(), Material.iron).setUnlocalizedName("ec.machines").setCreativeTab(Eternalcraft.tabEternalCraft);
 		machineBlock = new MachineBlock(settings().getMachineBlockID(), Material.iron).setUnlocalizedName("ec.machineblock").setCreativeTab(Eternalcraft.tabEternalCraft);
+		GameRegistry.registerBlock(machineBlock, "ec_machineblock");
+		GameRegistry.registerBlock(machines, ItemBlockECMachine.class, "ec_machines");
 	}
 
 	public static EternalcraftSettings settings() {

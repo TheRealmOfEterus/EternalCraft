@@ -35,13 +35,13 @@ public interface IMachine {
 	 * @param key The string identifier
 	 * @param value The string value
 	 */
-	void setMachineProperty(String key, String value);
+	void setMachineProperty(String key, Object value);
 	/**
 	 * Gets the value of the key passed.
 	 * @param key
 	 * @return Returns a string representation of the key's value
 	 */
-	String getMachineProperty(String key);
+	Object getMachineProperty(String key);
 	/**
 	 * Pass off for writing the machine's properties to the tag. Here
 	 * to remind everyone to.

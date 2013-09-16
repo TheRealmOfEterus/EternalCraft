@@ -37,8 +37,7 @@ public class ItemBlockECMachine extends ItemBlockWithMetadata{
 		if(machine != null){
 			if(metadata == 0){
 				if(stack.stackTagCompound != null && stack.stackTagCompound.hasKey("machineModifiers")){
-					NBTTagCompound modifierTag = stack.stackTagCompound.getCompoundTag("machineModifiers");
-					machine.setMachineProperty(machine.getMachineType().getModifiers()[0], modifierTag.getString(machine.getMachineType().getModifiers()[0]));
+					machine.readMachinePropertiesFromNBT(stack.stackTagCompound);
 				}
 			}
 		}

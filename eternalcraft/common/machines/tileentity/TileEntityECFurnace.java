@@ -24,6 +24,7 @@ import net.minecraft.tileentity.TileEntityFurnace;
 public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, IInventory, ISidedInventory {
 	private byte dirFacing = 0;
 	protected int decrementValue;	
+	private ItemStack material;
 	
 	public TileEntityECFurnace(){
 		
@@ -161,20 +162,30 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 	}
 
 	@Override
-	public String getMachineProperty(String id) {
-		return new String("" +decrementValue);
+	public Object getMachineProperty(String id) {
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[0]))
+			return new String("" +decrementValue);
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[1]))
+			return material;
+		return null;
 	}
 
 	@Override
-	public void setMachineProperty(String key, String value) {
-		if(key.equalsIgnoreCase("decrementValue"))
-			decrementValue = Integer.parseInt(value);
+	public void setMachineProperty(String key, Object value) {
+		if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[0])){
+			decrementValue = Integer.parseInt((String)value);
+		}else if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[1])){
+			material = (ItemStack)value;
+		}
 	}
 
 	@Override
 	public void writeMachinePropertiesToNBT(NBTTagCompound mainTag) {
 		NBTTagCompound modifierTag = new NBTTagCompound();
 		modifierTag.setString(MachineType.FURNACE.modifiers[0], "2");
+		NBTTagCompound tag = new NBTTagCompound();
+		material.writeToNBT(tag);
+		modifierTag.setTag(MachineType.FURNACE.modifiers[1], tag);
 		mainTag.setCompoundTag("machineModifiers", modifierTag);		
 	}
 
@@ -182,6 +193,8 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 	public void readMachinePropertiesFromNBT(NBTTagCompound mainTag) {
 		NBTTagCompound modifierTag = mainTag.getCompoundTag("machineModifiers");
 		int val = Integer.parseInt(modifierTag.getString(MachineType.FURNACE.modifiers[0]));
+		ItemStack stack = ItemStack.loadItemStackFromNBT((NBTTagCompound)modifierTag.getTag(MachineType.FURNACE.modifiers[1]));
+		material = stack;
 		decrementValue = val;
 	}
 }

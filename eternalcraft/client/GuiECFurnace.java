@@ -3,7 +3,7 @@ package eternalcraft.client;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerFurnace;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -20,7 +20,6 @@ import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 public class GuiECFurnace extends GuiContainer{
 	public enum Resources{
 		FURNACE(new ResourceLocation("eternalcraft", "textures/gui/furnaces/stonegui.png"));
-//		IRON(new ResourceLocation("eternalcraft", "textures/gui/furnaces/irongui.png"));
 		public final ResourceLocation resource;
 		private Resources(ResourceLocation loc){
 			resource = loc;
@@ -28,7 +27,6 @@ public class GuiECFurnace extends GuiContainer{
 	}
 	public enum Gui{
 		FURNACE(MachineType.FURNACE, Resources.FURNACE);
-//		IRON(MachineType.IRON, Resources.IRON);
 		private Resources resources;
 		private MachineType machineType;
 		private Gui(MachineType type, Resources res){
@@ -39,7 +37,6 @@ public class GuiECFurnace extends GuiContainer{
 			switch(machineType){
 			case BASE: return null;
 			case FURNACE: return new ContainerECFurnace(invPlayer, teFurnace);
-//			case IRON: return new ContainerFurnace(invPlayer, teFurnace);
 			}
 			return null;
 		}
