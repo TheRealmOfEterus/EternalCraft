@@ -4,13 +4,15 @@
     <!-- Author: bau5 -->
         <!--Blocks-->
     <entry key="tile.ec.machines.furnace.name">Furnace</entry>
-        <entry key="tile.ec.machineblock.name">Machine Block</entry><!--Items--><entry
-        	key="item.ec.machinepart.panel.name">Machine Panel</entry>
+    <entry key="tile.ec.machineblock.name">Machine Block</entry>
+        <!--Items-->
+    <entry key="item.ec.machinepart.panel.name">Machine Panel</entry>
 	<entry key="item.ec.machinepart.grinder.name">Grinder Part</entry>
 	<entry key="item.ec.machinepart.grinderbody.name">Grinder Body</entry>
 	<entry key="item.ec.machinepart.grinderset.name">Grinder Set</entry>
 	<entry key="item.ec.machinepart.screw.name">Screw</entry>
-	<entry key="item.ec.machinetool.name">Drill</entry><!--Others-->
+	<entry key="item.ec.machinetool.name">Hammer</entry>
+	   <!--Others-->
     <entry key="itemGroup.tabEternalCraft">Eternal Craft</entry>
     
 </properties>

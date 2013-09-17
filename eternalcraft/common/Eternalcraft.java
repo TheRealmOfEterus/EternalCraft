@@ -18,6 +18,7 @@ import eternalcraft.common.core.handlers.ConfigHandler;
 import eternalcraft.common.core.handlers.ECPacketHandler;
 import eternalcraft.common.core.handlers.LanguageHandler;
 import eternalcraft.common.core.handlers.VersionCheckHandler.VersionChecker;
+import eternalcraft.common.items.EternalcraftItems;
 import eternalcraft.common.machines.EternalcraftMachines;
 
 
@@ -59,5 +60,7 @@ public class Eternalcraft {
 	public void initParts(){
 		tabEternalCraft = new CreativeTabEC("tabEternalCraft");
 		EternalcraftMachines.initialize();
+		EternalcraftItems.init();
+		
 	}
 }

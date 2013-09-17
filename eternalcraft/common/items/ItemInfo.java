@@ -1,19 +1,23 @@
 package eternalcraft.common.items;
 
-public class itemInfo {
-	/**
-	 * @author Azhdev
-	 */
+import eternalcraft.common.core.Reference;
+
+/**
+ * @author Azhdev
+ */
+public class ItemInfo {
+
 	//items id's
-	public static int HAMMER_ID;
-	public static int HAMMER_DEFAULT = 12010;
+	public static int HAMMER_ID = EternalcraftItems.settings().getMachineToolID();
+	public static int HAMMER_DEFAULT = EternalcraftItems.settings().getDefaults().getMachineToolID();
 		//misc integers
-		public static int ID_CORRECTION = 256;
+	public static int ID_CORRECTION = 256;
 	//item strings
-		//Unlocalized names
-		public static String HAMMER_UNLOC = "HAMMER";
+	//Unlocalized names
+	public static String BASE = "ec.";
+	public static String HAMMER_UNLOC = BASE + "hammer";
 	
-		//texture strings
-		public static String TEXTURE_LOC = "eternalcraft";
-		public static String HAMMER_ICON = "Hammer";
+	//texture strings
+	public static String TEXTURE_LOC = Reference.TEXTURE_LOC;
+	public static String HAMMER_ICON = "Hammer";
 }

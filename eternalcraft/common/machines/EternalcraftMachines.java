@@ -18,8 +18,6 @@ public class EternalcraftMachines {
 	public static void initialize() {
 		TextureHelper.buildFurnaceTextureNames();
 		initBlocks();
-		machinePartItem = new ItemMachinePart(settings().getMachinePartItemID(), 0).setUnlocalizedName("ec.machinepart");
-		machineToolItem = new ItemMachineTool(settings().getMachineToolID()).setUnlocalizedName("ec.machinetool");
 		registerMachineTileEntities();
 	}
 	
