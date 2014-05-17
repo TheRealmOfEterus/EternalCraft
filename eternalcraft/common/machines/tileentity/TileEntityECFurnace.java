@@ -17,17 +17,15 @@ import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
- * 
  * @author bau5
- *
  */
 public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, IInventory, ISidedInventory {
+	
 	private byte dirFacing = 0;
 	protected int decrementValue;	
 	private ItemStack material;
 	
-	public TileEntityECFurnace(){
-		
+	public TileEntityECFurnace() {
 	}
 	
 	@Override
@@ -103,24 +101,27 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 		NBTTagCompound nbt = new NBTTagCompound();
 		this.writeToNBT(nbt);
 		return new Packet132TileEntityData(xCoord, yCoord, zCoord, 2, nbt);
-		
 	}
+	
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		readFromNBT(pkt.data);
 	}
+	
 	@Override
 	public void readFromNBT(NBTTagCompound tagCompound) {
 		super.readFromNBT(tagCompound);
 		setDirectionFacing(tagCompound.getByte("facing"));
 		readMachinePropertiesFromNBT(tagCompound);
 	}
+	
 	@Override
 	public void writeToNBT(NBTTagCompound tag) {
 		super.writeToNBT(tag);
 		tag.setByte("facing", dirFacing);
 		writeMachinePropertiesToNBT(tag);
 	}
+	
 	/* 
 	 * Private function in TileEntityFurnace we need access to... 
 	 */
@@ -163,38 +164,43 @@ public class TileEntityECFurnace extends TileEntityFurnace implements IMachine, 
 
 	@Override
 	public Object getMachineProperty(String id) {
-		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[0]))
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[0])) {
 			return new String("" +decrementValue);
-		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[1]))
-			return material;
+		}
+		if(id.equalsIgnoreCase(MachineType.FURNACE.modifiers[1])) {
+			return material != null ? material : null;
+		}
 		return null;
 	}
 
 	@Override
 	public void setMachineProperty(String key, Object value) {
-		if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[0])){
+		if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[0])) {
 			decrementValue = Integer.parseInt((String)value);
-		}else if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[1])){
+		} else if(key.equalsIgnoreCase(MachineType.FURNACE.modifiers[1])) {
 			material = (ItemStack)value;
 		}
 	}
 
 	@Override
 	public void writeMachinePropertiesToNBT(NBTTagCompound mainTag) {
-		NBTTagCompound modifierTag = new NBTTagCompound();
+		final NBTTagCompound modifierTag = new NBTTagCompound();
 		modifierTag.setString(MachineType.FURNACE.modifiers[0], "2");
 		NBTTagCompound tag = new NBTTagCompound();
-		material.writeToNBT(tag);
+		if (material != null) {
+			material.writeToNBT(tag);
+		}
 		modifierTag.setTag(MachineType.FURNACE.modifiers[1], tag);
 		mainTag.setCompoundTag("machineModifiers", modifierTag);		
 	}
 
 	@Override
 	public void readMachinePropertiesFromNBT(NBTTagCompound mainTag) {
-		NBTTagCompound modifierTag = mainTag.getCompoundTag("machineModifiers");
-		int val = Integer.parseInt(modifierTag.getString(MachineType.FURNACE.modifiers[0]));
-		ItemStack stack = ItemStack.loadItemStackFromNBT((NBTTagCompound)modifierTag.getTag(MachineType.FURNACE.modifiers[1]));
+		final NBTTagCompound modifierTag = mainTag.getCompoundTag("machineModifiers");
+		final int val = Integer.parseInt(modifierTag.getString(MachineType.FURNACE.modifiers[0]));
+		final ItemStack stack = ItemStack.loadItemStackFromNBT((NBTTagCompound)modifierTag.getTag(MachineType.FURNACE.modifiers[1]));
 		material = stack;
 		decrementValue = val;
 	}
+	
 }

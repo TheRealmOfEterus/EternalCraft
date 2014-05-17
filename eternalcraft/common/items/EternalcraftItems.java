@@ -25,4 +25,5 @@ public class EternalcraftItems {
 	public static EternalcraftSettings settings() {
 		return Eternalcraft.instance.settings;
 	}
+	
 }
