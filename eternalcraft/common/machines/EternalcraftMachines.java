@@ -37,8 +37,8 @@ public class EternalcraftMachines {
 	}
 
 	public static void initRecipes() {
-		GameRegistry.addShapelessRecipe(new ItemStack(machinePartItem, 1, 3), new Object[]{
-			new ItemStack(machinePartItem, 1, 1), new ItemStack(machinePartItem, 1, 2)
-		});
+		//FIXME
+		//GameRegistry.addShapelessRecipe(new ItemStack(machinePartItem, 1, 3), new Object[]{ new ItemStack(machinePartItem, 1, 1), new ItemStack(machinePartItem, 1, 2) });
 	}
+	
 }

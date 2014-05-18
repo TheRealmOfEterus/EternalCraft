@@ -10,8 +10,11 @@ import eternalcraft.common.core.Reference;
  *
  */
 public class LanguageHandler {
-	public static void loadLangauges() {
-		for(String lang : Reference.SUPPORTED_LANGUAGES)
+	
+	public static final void loadLangauges() {
+		for(String lang : Reference.SUPPORTED_LANGUAGES) {
 			LanguageRegistry.instance().loadLocalization(new ResourceLocation(Reference.LANG_LOCATION +lang +".xml").getResourcePath(), lang, true);
+		}
 	}
+	
 }

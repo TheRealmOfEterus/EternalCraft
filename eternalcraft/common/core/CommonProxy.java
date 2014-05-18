@@ -14,46 +14,48 @@ import eternalcraft.common.machines.tileentity.TileEntityECFurnace;
 
 /**
  * The CommonProxy, handles all GUI interactions.
- * 
  * @author bau5
- *
  */
 public class CommonProxy implements IGuiHandler {
 
 	/**
-	 *  Only invoked by the client.
+	 * Only invoked by the client.
 	 */
-	public void registerRenderInformation() { }
+	public void registerRenderInformation() {
+	}
+
 	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
-		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(te == null || !(te instanceof IMachine))
+	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		final TileEntity te = world.getBlockTileEntity(x, y, z);
+		if (te == null || !(te instanceof IMachine)) {
 			return null;
-		
-		switch(ID){
-		case 1: return new ContainerECFurnace(player.inventory, (TileEntityECFurnace)te);
+		}
+		switch (ID) {
+		case 1:
+			return new ContainerECFurnace(player.inventory, (TileEntityECFurnace) te);
 		}
 		return null;
 	}
 
 	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-			int x, int y, int z) {
-		TileEntity te = world.getBlockTileEntity(x, y, z);
-		if(te == null || !(te instanceof IMachine))
-				return null;
-		switch(ID){
-		case 1: return new GuiECFurnace(Gui.FURNACE, player.inventory, ((TileEntityECFurnace)te));
+	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
+		final TileEntity te = world.getBlockTileEntity(x, y, z);
+		if (te == null || !(te instanceof IMachine)) {
+			return null;
+		}
+		switch (ID) {
+		case 1:
+			return new GuiECFurnace(Gui.FURNACE, player.inventory, ((TileEntityECFurnace) te));
 		}
 		return null;
 	}
-	
-	public void openFurnaceGUI(EntityPlayer player, World world, int x, int y, int z, int meta){
+
+	public void openFurnaceGUI(EntityPlayer player, World world, int x, int y, int z, int meta) {
 		player.openGui(Eternalcraft.instance, meta, world, x, y, z);
 	}
-	
-	public World getClientSideWorld(){
+
+	public World getClientSideWorld() {
 		return null;
 	}
+	
 }

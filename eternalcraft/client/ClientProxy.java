@@ -12,9 +12,7 @@ import eternalcraft.common.helpers.TextureHelper;
 
 /**
  * Handles client only calls, such as rendering.
- * 
  * @author bau5
- *
  */
 public class ClientProxy extends CommonProxy {
 	/**
@@ -30,4 +28,5 @@ public class ClientProxy extends CommonProxy {
 	public World getClientSideWorld() {
 		return FMLClientHandler.instance().getClient().theWorld;
 	}
+	
 }

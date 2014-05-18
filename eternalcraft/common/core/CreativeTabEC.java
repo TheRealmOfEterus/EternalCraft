@@ -6,9 +6,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
 /**
- * 
  * @author bau5
- *
  */
 public class CreativeTabEC extends CreativeTabs{
 
@@ -20,4 +18,5 @@ public class CreativeTabEC extends CreativeTabs{
 	public ItemStack getIconItemStack() {
 		return new ItemStack(EternalcraftMachines.machineBlock, 1, 0);
 	}
+	
 }

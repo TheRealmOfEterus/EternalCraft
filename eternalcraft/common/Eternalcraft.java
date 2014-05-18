@@ -21,46 +21,46 @@ import eternalcraft.common.core.handlers.VersionCheckHandler.VersionChecker;
 import eternalcraft.common.items.EternalcraftItems;
 import eternalcraft.common.machines.EternalcraftMachines;
 
-
-@Mod(modid=Reference.MOD_ID, name=Reference.MOD_NAME, version=Reference.VERSION)
-@NetworkMod(serverSideRequired=false, clientSideRequired=true, channels={Reference.CHANNEL},
-			packetHandler=ECPacketHandler.class)
+@Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.VERSION)
+@NetworkMod(serverSideRequired = false, clientSideRequired = true, channels = { Reference.CHANNEL }, packetHandler = ECPacketHandler.class)
 public class Eternalcraft {
+	
 	@Instance(Reference.MOD_ID)
 	public static Eternalcraft instance;
-	public static CreativeTabEC tabEternalCraft;
-	@SidedProxy(clientSide="eternalcraft.client.ClientProxy",
-				serverSide="eternalcraft.common.core.CommonProxy")
+	
+	@SidedProxy(clientSide = "eternalcraft.client.ClientProxy", serverSide = "eternalcraft.common.core.CommonProxy")
 	public static CommonProxy proxy;
 	
+	public static CreativeTabEC tabEternalCraft = new CreativeTabEC("tabEternalCraft");
+
 	public static int GUI_ID = 0;
-	
+
 	public EternalcraftSettings settings;
-	
+
 	@EventHandler
-	public void preInitialization(FMLPreInitializationEvent ev){
+	public void preInitialization(FMLPreInitializationEvent ev) {
 		settings = ConfigHandler.loadConfig(new Configuration(ev.getSuggestedConfigurationFile()));
-		if(settings.doVersionCheck())
+		if (settings.doVersionCheck()) {
 			VersionChecker.go();
+		}
 		LanguageHandler.loadLangauges();
 		initParts();
 	}
-	
+
 	@EventHandler
-	public void initialization(FMLInitializationEvent ev){
+	public void initialization(FMLInitializationEvent ev) {
 		NetworkRegistry.instance().registerGuiHandler(instance, proxy);
 	}
-	
+
 	@EventHandler
-	public void postInitialization(FMLPostInitializationEvent ev){
+	public void postInitialization(FMLPostInitializationEvent ev) {
 		EternalcraftMachines.initRecipes();
 		proxy.registerRenderInformation();
 	}
-	
-	public void initParts(){
-		tabEternalCraft = new CreativeTabEC("tabEternalCraft");
+
+	public void initParts() {
 		EternalcraftMachines.initialize();
 		EternalcraftItems.init();
-		
 	}
+
 }

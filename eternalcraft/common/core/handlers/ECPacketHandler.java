@@ -6,13 +6,10 @@ import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.Player;
 
 /**
- * The Packet Handler, will pass off incoming packets to handle
- * them correctly.
- * 
+ * The Packet Handler, will pass off incoming packets to handle them correctly.
  * @author bau5
- *
  */
-public class ECPacketHandler implements IPacketHandler{
+public class ECPacketHandler implements IPacketHandler {
 
 	@Override
 	public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {

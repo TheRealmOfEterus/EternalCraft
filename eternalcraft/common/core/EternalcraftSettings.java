@@ -1,36 +1,41 @@
 package eternalcraft.common.core;
 
 /**
- * 
  * @author bau5
- *
  */
 public class EternalcraftSettings {
+	
 	public boolean VERSION_CHECK;
 	public boolean successfullyLoaded = false;
 	public int MACHINE_BLOCK_ID;
 	public int MACHINES_ID;
 	public int MACHINE_PART_ID;
 	public int MACHINE_TOOL_ID;
-	
-	public boolean doVersionCheck(){
+
+	public boolean doVersionCheck() {
 		return VERSION_CHECK;
 	}
-	public boolean loadedSuccessfully(){
+
+	public boolean loadedSuccessfully() {
 		return successfullyLoaded;
 	}
+
 	public int getMachineBlockID() {
 		return MACHINE_BLOCK_ID;
 	}
+
 	public int getMachinesID() {
 		return MACHINES_ID;
 	}
+
 	public int getMachinePartItemID() {
 		return MACHINE_PART_ID;
 	}
+
 	public int getMachineToolID() {
 		return MACHINE_TOOL_ID;
 	}
+
 	public EternalcraftSettings getDefaults() {
 		EternalcraftSettings defaults = new EternalcraftSettings();
 		defaults.VERSION_CHECK = true;
@@ -42,4 +47,5 @@ public class EternalcraftSettings {
 		defaults.successfullyLoaded = true;
 		return defaults;
 	}
+	
 }
