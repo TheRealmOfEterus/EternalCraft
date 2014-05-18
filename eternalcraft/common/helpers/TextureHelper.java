@@ -37,13 +37,16 @@ public class TextureHelper {
 	 * 		right : 4
 	 * 		left  : 5
 	 */
-	public enum Side{
-		BOTTOM(),
-		TOP(),
-		BACK(),
-		FRONT(),
-		LEFT(),
-		RIGHT(),
+	public static enum Side {
+		
+		BOTTOM(0), TOP(1), BACK(2), FRONT(3), LEFT(4), RIGHT(5);
+		
+		public final int side;
+		
+		private Side(int side) {
+			this.side = side;
+		}
+		
 	}
 	
 	public static final int BOTTOM = 0;

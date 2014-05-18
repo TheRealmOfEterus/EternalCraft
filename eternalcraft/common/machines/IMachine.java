@@ -3,11 +3,10 @@ package eternalcraft.common.machines;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
- * 
  * @author bau5
- *
  */
 public interface IMachine {
+	
 	/**
 	 * Method to get the direction the machine is facing, used for renders.
 	 * 
@@ -54,4 +53,5 @@ public interface IMachine {
 	 * @param mainTag The tag for the tile entity.
 	 */
 	void readMachinePropertiesFromNBT(NBTTagCompound mainTag);
+	
 }
