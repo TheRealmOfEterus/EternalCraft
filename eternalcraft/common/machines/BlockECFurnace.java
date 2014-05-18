@@ -59,16 +59,17 @@ public class BlockECFurnace extends BlockECContainer {
 	}
 
 	@Override
-	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int par5) {
+	public Icon getBlockTexture(IBlockAccess blockAccess, int x, int y, int z, int side) {
 		final TileEntity te = blockAccess.getBlockTileEntity(x, y, z);
 		if (te != null && te instanceof IMachine) {
 			IMachine machine = (IMachine) te;
 			if (machine.getMachineType() == null) {
 				return null;
+			} else {
+				return machine.getMachineType().getIconBySide(side, machine.getDirectionFacing(), machine.isActive());
 			}
-			return machine.getMachineType().getIconBySide(par5, machine.getDirectionFacing(), machine.isActive());
 		}
-		return super.getBlockTexture(blockAccess, x, y, z, par5);
+		return super.getBlockTexture(blockAccess, x, y, z, side);
 	}
 
 	@Override

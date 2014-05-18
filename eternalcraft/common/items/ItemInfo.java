@@ -8,16 +8,16 @@ import eternalcraft.common.core.Reference;
 public class ItemInfo {
 
 	//items id's
-	public static int HAMMER_ID = EternalcraftItems.settings().getMachineToolID();
-	public static int HAMMER_DEFAULT = EternalcraftItems.settings().getDefaults().getMachineToolID();
+	public static final int HAMMER_ID = EternalcraftItems.settings().getMachineToolID();
+	public static final int HAMMER_DEFAULT = EternalcraftItems.settings().getDefaults().getMachineToolID();
 		//misc integers
-	public static int ID_CORRECTION = 256;
+	public static final int ID_CORRECTION = 256;
 	//item strings
 	//Unlocalized names
-	public static String BASE = "ec.";
-	public static String HAMMER_UNLOC = BASE + "hammer";
+	public static final String BASE = "ec.";
+	public static final String HAMMER_UNLOC = BASE + "hammer";
 	
 	//texture strings
-	public static String TEXTURE_LOC = Reference.TEXTURE_LOC;
-	public static String HAMMER_ICON = "Hammer";
+	public static final String TEXTURE_LOC = Reference.TEXTURE_LOC;
+	public static final String HAMMER_ICON = "Hammer";
 }
