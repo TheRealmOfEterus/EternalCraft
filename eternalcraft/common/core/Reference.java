@@ -6,7 +6,7 @@ package eternalcraft.common.core;
  */
 public class Reference {
 	
-	public static final String MOD_ID = "eternalcraft";
+	public static final String MOD_ID = "Eternalcraft";
 	public static final String VERSION = "0.0.1";
 	public static final String MOD_NAME= "Eternalcraft";
 	public static final String CHANNEL = MOD_ID;
